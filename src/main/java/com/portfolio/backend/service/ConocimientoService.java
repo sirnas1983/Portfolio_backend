@@ -2,40 +2,42 @@
 package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Conocimiento;
-import com.portfolio.backend.repository.RepositoryConocimiento;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.portfolio.backend.repository.ConocimientoRepository;
+import org.springframework.stereotype.Service;
 
-
-public class ServiceConocimiento implements IServiceConocimiento {
+@Service
+public class ConocimientoService implements IConocimientoService {
     
     @Autowired
-    private RepositoryConocimiento repoCono;
+    private ConocimientoRepository conocimientoRepo;
 
     @Override
     public List<Conocimiento> verConocimientos() {
-        return repoCono.findAll();
+        return conocimientoRepo.findAll();
     }
 
+    
     @Override
     public Conocimiento verConocimiento(Long id) {
-        return repoCono.findById(id).orElse(null);
+        return conocimientoRepo.findById(id).orElse(null);
     }
 
     @Override
     public void borrarConocimiento(Long id) {
-        repoCono.deleteById(id);
+        conocimientoRepo.deleteById(id);
     }
 
     @Override
     public void agregarConocimiento(Conocimiento conocimiento) {
-        repoCono.save(conocimiento);
+        conocimientoRepo.save(conocimiento);
     }
 
     @Override
     public void modificarConocimiento(Long id, Conocimiento conocimiento) {
         conocimiento.setId(id);
-        repoCono.save(conocimiento);
+        agregarConocimiento(conocimiento);
     }
     
 }

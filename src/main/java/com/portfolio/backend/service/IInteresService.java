@@ -4,7 +4,7 @@ import com.portfolio.backend.model.Interes;
 import java.util.List;
 
 
-public interface IServiceInteres {
+public interface IInteresService {
     public List<Interes> verInteres();
     public Interes verInteres(Long id);
     public void borrarInteres(Long id);

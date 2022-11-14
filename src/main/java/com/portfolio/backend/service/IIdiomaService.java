@@ -5,8 +5,8 @@ import com.portfolio.backend.model.Idioma;
 import java.util.List;
 
 
-public interface IServiceIdioma {
-    public List<Idioma> verIdioma();
+public interface IIdiomaService {
+    public List<Idioma> verIdiomas();
     public Idioma verIdioma(Long id);
     public void borrarIdioma(Long id);
     public void agregarIdioma(Idioma idioma);

@@ -4,7 +4,7 @@ import com.portfolio.backend.model.Conocimiento;
 import java.util.List;
 
 
-public interface IServiceConocimiento {
+public interface IConocimientoService {
     
     public List<Conocimiento> verConocimientos();
     public Conocimiento verConocimiento(Long id);

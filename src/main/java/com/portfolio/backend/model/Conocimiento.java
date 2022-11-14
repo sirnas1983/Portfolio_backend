@@ -1,9 +1,12 @@
 package com.portfolio.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +25,14 @@ public class Conocimiento {
     private String nivel;
     private int duracion;
     private String descripcion;
-    private Long personaId;
+    
+    @ManyToOne()
+    @JoinColumn(name="persona_id")
+    @JsonIgnore
+    private Persona persona;
+    
 
-    public Conocimiento(Long id, String nombre, String institucion, String area, String nivel, int duracion, String descripcion, Long personaId) {
+    public Conocimiento(Long id, String nombre, String institucion, String area, String nivel, int duracion, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.institucion = institucion;
@@ -32,7 +40,6 @@ public class Conocimiento {
         this.nivel = nivel;
         this.duracion = duracion;
         this.descripcion = descripcion;
-        this.personaId = personaId;
     }
 
     public Conocimiento() {

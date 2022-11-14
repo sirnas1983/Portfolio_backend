@@ -4,7 +4,7 @@ package com.portfolio.backend.service;
 import com.portfolio.backend.model.Skill;
 import java.util.List;
 
-public interface IServiceSkill {
+public interface ISkillService {
     public List<Skill> verSkills();
     public Skill verSkill(Long id);
     public void borrarSkill(Long id);

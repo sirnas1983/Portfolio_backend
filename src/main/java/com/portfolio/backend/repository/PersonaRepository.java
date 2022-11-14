@@ -1,10 +1,11 @@
+
 package com.portfolio.backend.repository;
 
-import com.portfolio.backend.model.Experiencia;
+import com.portfolio.backend.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RepositoryExperiencia extends JpaRepository<Experiencia, Long> {
+public interface PersonaRepository extends JpaRepository<Persona, Long>{
     
 }
