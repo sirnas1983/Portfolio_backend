@@ -8,5 +8,7 @@ public interface IExperienciaService {
     public Experiencia verExperiencia(Long id);
     public void borrarExperiencia(Long id);
     public void agregarExperiencia(Experiencia experiencia);
-    public void modificarExperiencia (Long id, Experiencia experiencia);    
+    public void modificarExperiencia (Long id, Experiencia experiencia);  
+    public List<Experiencia> verExperienciasPorPersonaId(Long idPersona);
+
 }

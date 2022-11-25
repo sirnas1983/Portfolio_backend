@@ -37,5 +37,10 @@ public class ExperienciaService implements IExperienciaService{
         experiencia.setId(id);
         agregarExperiencia(experiencia);
     }
+
+    @Override
+    public List<Experiencia> verExperienciasPorPersonaId(Long idPersona) {
+        return experienciaRepo.findAllByPersonaId(idPersona);
+    }
     
 }

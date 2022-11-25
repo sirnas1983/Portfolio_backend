@@ -39,5 +39,10 @@ public class ConocimientoService implements IConocimientoService {
         conocimiento.setId(id);
         agregarConocimiento(conocimiento);
     }
+
+    @Override
+    public List<Conocimiento> verConocimientosPorPersonaId(Long idPersona) {
+        return conocimientoRepo.findAllByPersonaId(idPersona);
+    }
     
 }

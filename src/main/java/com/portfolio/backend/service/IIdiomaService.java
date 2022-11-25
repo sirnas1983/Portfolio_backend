@@ -10,5 +10,7 @@ public interface IIdiomaService {
     public Idioma verIdioma(Long id);
     public void borrarIdioma(Long id);
     public void agregarIdioma(Idioma idioma);
-    public void modificarIdioma (Long id, Idioma idioma);    
+    public void modificarIdioma (Long id, Idioma idioma); 
+    public List<Idioma> verIdiomasPorPersonaId(Long idPersona);
+
 }

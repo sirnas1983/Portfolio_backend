@@ -1,6 +1,8 @@
 package com.portfolio.backend.controller;
 
+
 import com.portfolio.backend.model.Skill;
+import com.portfolio.backend.service.PersonaService;
 import com.portfolio.backend.service.SkillService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +19,18 @@ public class SkillController {
     @Autowired
     private SkillService skillSer;
     
+    @Autowired
+    private PersonaService personaSer;
+    
     @GetMapping("/ver/skills")
     @ResponseBody
     public List<Skill> verSkills(){
         return skillSer.verSkills();
     }
-    
-    @GetMapping("/ver/skill/{id}")
-    @ResponseBody
-    public Skill verSkill(@PathVariable Long id){
-        return skillSer.verSkill(id);
+        
+    @GetMapping("/ver/skills/persona/{idPersona}")
+    public List<Skill> verSkillsPorPersona(@PathVariable Long idPersona){
+        return skillSer.verSkillsPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/skill/{id}")
@@ -40,9 +44,9 @@ public class SkillController {
         skillSer.agregarSkill(skill);
     }
     
-    @PostMapping("/agregar/skill")
-    public void agregarSkill(@RequestBody Skill skill){
+    @PostMapping("/agregar/skill/{personaId}")
+    public void agregarSkill(@RequestBody Skill skill, @PathVariable Long personaId){
+        skill.setPersona(personaSer.verPersona(personaId));
         skillSer.agregarSkill(skill);
-    }        
-    
+    }
 }

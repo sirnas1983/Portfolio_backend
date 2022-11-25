@@ -3,6 +3,8 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.model.PersonaDTO;
 import com.portfolio.backend.model.Persona;
 import com.portfolio.backend.service.PersonaService;
+import java.util.ArrayList;
+import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,7 @@ public class PersonaDTOController {
     @Autowired
     PersonaService personaSer;
         
-    @GetMapping("/ver/persona/dto/{personaId}")
+    @GetMapping("/ver/persona/{personaId}")
     public PersonaDTO verPersonaDTO(@PathVariable Long personaId){
         
         Persona persona = personaSer.verPersona(personaId);
@@ -24,5 +26,17 @@ public class PersonaDTOController {
         
         return personaDTO;
         
+    }
+    
+    @GetMapping("/ver/personas")
+    public List<PersonaDTO> verPersonasDTO(){
+        
+        List<Persona> listaPersonas = personaSer.verPersonas();
+        List<PersonaDTO> listaPersonaDTOs = new ArrayList<>();
+        
+        for (Persona persona : listaPersonas){
+        listaPersonaDTOs.add(verPersonaDTO(persona.getId()));
+        }
+        return listaPersonaDTOs;
     }
 }

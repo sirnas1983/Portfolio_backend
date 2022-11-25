@@ -2,6 +2,7 @@ package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Idioma;
 import com.portfolio.backend.service.IdiomaService;
+import com.portfolio.backend.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,18 @@ public class IdiomaController {
     @Autowired
     private IdiomaService idiomaSer;
     
+    @Autowired
+    private PersonaService personaSer;
+    
     @GetMapping("/ver/idiomas")
     @ResponseBody
     public List<Idioma> verIdiomas(){
         return idiomaSer.verIdiomas();
     }
-    
-    @GetMapping("/ver/idioma/{id}")
-    @ResponseBody
-    public Idioma verIdioma(@PathVariable Long id){
-        return idiomaSer.verIdioma(id);
+        
+    @GetMapping("/ver/idiomas/persona/{idPersona}")
+    public List<Idioma> verIdiomasPorPersona(@PathVariable Long idPersona){
+        return idiomaSer.verIdiomasPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/idioma/{id}")
@@ -40,9 +43,9 @@ public class IdiomaController {
         idiomaSer.agregarIdioma(idioma);
     }
     
-    @PostMapping("/agregar/idioma")
-    public void agregarIdioma(@RequestBody Idioma idioma){
+    @PostMapping("/agregar/idioma/{personaId}")
+    public void agregarIdioma(@RequestBody Idioma idioma, @PathVariable Long personaId){
+        idioma.setPersona(personaSer.verPersona(personaId));
         idiomaSer.agregarIdioma(idioma);
     }
-    
 }

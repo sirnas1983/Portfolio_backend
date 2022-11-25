@@ -2,6 +2,7 @@ package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Conocimiento;
 import com.portfolio.backend.service.ConocimientoService;
+import com.portfolio.backend.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,18 @@ public class ConocimientoController {
     @Autowired
     private ConocimientoService conocimientoSer;
     
+    @Autowired
+    private PersonaService personaSer;
+    
     @GetMapping("/ver/conocimientos")
     @ResponseBody
     public List<Conocimiento> verConocimientos(){
         return conocimientoSer.verConocimientos();
     }
-    
-    @GetMapping("/ver/conocimiento/{id}")
-    @ResponseBody
-    public Conocimiento verConocimiento(@PathVariable Long id){
-        return conocimientoSer.verConocimiento(id);
+        
+    @GetMapping("/ver/conocimientos/persona/{idPersona}")
+    public List<Conocimiento> verConocimientosPorPersona(@PathVariable Long idPersona){
+        return conocimientoSer.verConocimientosPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/conocimiento/{id}")
@@ -40,9 +43,10 @@ public class ConocimientoController {
         conocimientoSer.agregarConocimiento(conocimiento);
     }
     
-    @PostMapping("/agregar/conocimiento")
-    public void agregarConocimiento(@RequestBody Conocimiento conocimiento){
+    @PostMapping("/agregar/conocimiento/{personaId}")
+    public void agregarConocimiento(@RequestBody Conocimiento conocimiento, @PathVariable Long personaId){
+        conocimiento.setPersona(personaSer.verPersona(personaId));
         conocimientoSer.agregarConocimiento(conocimiento);
     }
-    
 }
+

@@ -37,5 +37,10 @@ public class IdiomaService implements IIdiomaService{
         idioma.setId(id);
         idiomaRepo.save(idioma);
     }
+
+    @Override
+    public List<Idioma> verIdiomasPorPersonaId(Long idPersona) {
+        return idiomaRepo.findAllByPersonaId(idPersona);
+    }
     
 }

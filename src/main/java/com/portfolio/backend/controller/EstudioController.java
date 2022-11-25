@@ -26,11 +26,10 @@ public class EstudioController {
         System.out.println(estudioSer.verEstudios().toString());
         return estudioSer.verEstudios();
     }
-    
-    @GetMapping("/ver/estudito")
-    @ResponseBody
-    public String verEstudito(){
-        return estudioSer.verEstudios().toString();
+        
+    @GetMapping("/ver/estudios/persona/{idPersona}")
+    public List<Estudio> verEstudiosPorPersona(@PathVariable Long idPersona){
+        return estudioSer.verEstudiosPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/estudio/{id}")
@@ -44,14 +43,9 @@ public class EstudioController {
         estudioSer.agregarEstudio(estudio);
     }
     
-    @PostMapping("/agregar/estudio")
-    public void agregarEstudio(@RequestBody Estudio estudio){
+    @PostMapping("/agregar/estudio/{personaId}")
+    public void agregarEstudio(@RequestBody Estudio estudio, @PathVariable Long personaId){
+        estudio.setPersona(personaSer.verPersona(personaId));
         estudioSer.agregarEstudio(estudio);
     }
-    
-    @GetMapping("/persona/{idPersona}/ver/estudios")
-    public List<Estudio> verEstudiosPorPersona(@PathVariable Long idPersona){
-        return estudioSer.verEstudiosPorPersonaId(idPersona);
-    }
-       
 }

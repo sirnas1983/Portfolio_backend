@@ -2,6 +2,7 @@ package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Experiencia;
 import com.portfolio.backend.service.ExperienciaService;
+import com.portfolio.backend.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,32 +18,34 @@ public class ExperienciaController {
     @Autowired
     private ExperienciaService experienciaSer;
     
+    @Autowired
+    private PersonaService personaSer;
+    
     @GetMapping("/ver/experiencias")
     @ResponseBody
     public List<Experiencia> verExperiencias(){
         return experienciaSer.verExperiencias();
     }
-    
-    @GetMapping("/ver/experiencia/{id}")
-    @ResponseBody
-    public Experiencia verEstudio(@PathVariable Long id){
-        return experienciaSer.verExperiencia(id);
+        
+    @GetMapping("/ver/experiencias/persona/{idPersona}")
+    public List<Experiencia> verExperienciasPorPersona(@PathVariable Long idPersona){
+        return experienciaSer.verExperienciasPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/experiencia/{id}")
-    public void borrarEstudio(@PathVariable Long id){
+    public void borrarExperiencia(@PathVariable Long id){
         experienciaSer.borrarExperiencia(id);
     }
     
     @PostMapping("/modificar/experiencia/{id}")
-    public void modificarEstudio(@PathVariable Long id, @RequestBody Experiencia experiencia){
+    public void modificarExperiencia(@PathVariable Long id, @RequestBody Experiencia experiencia){
         experiencia.setId(id);
         experienciaSer.agregarExperiencia(experiencia);
     }
     
-    @PostMapping("/agregar/experiencia")
-    public void agregarEstudio(@RequestBody Experiencia experiencia){
+    @PostMapping("/agregar/experiencia/{personaId}")
+    public void agregarExperiencia(@RequestBody Experiencia experiencia, @PathVariable Long personaId){
+        experiencia.setPersona(personaSer.verPersona(personaId));
         experienciaSer.agregarExperiencia(experiencia);
     }
-       
 }

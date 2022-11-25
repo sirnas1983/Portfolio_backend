@@ -38,5 +38,11 @@ public class SkillService implements ISkillService{
         skill.setId(id);
         skillRepo.save(skill);
     }
+
+    @Override
+    public List<Skill> verSkillsPorPersonaId(Long idPersona) {
+        return skillRepo.findAllByPersonaId(idPersona);
+    }
+    
     
 }

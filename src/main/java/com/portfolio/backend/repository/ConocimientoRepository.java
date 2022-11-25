@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ConocimientoRepository extends JpaRepository<Conocimiento, Long> {
 
+    List<Conocimiento> findAllByPersonaId(Long personaId);
     
 }

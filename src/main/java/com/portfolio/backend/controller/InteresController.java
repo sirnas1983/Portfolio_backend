@@ -2,6 +2,7 @@ package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Interes;
 import com.portfolio.backend.service.InteresService;
+import com.portfolio.backend.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,18 @@ public class InteresController {
     @Autowired 
     private InteresService interesSer;
     
+    @Autowired
+    private PersonaService personaSer;
+    
     @GetMapping("/ver/intereses")
     @ResponseBody
     public List<Interes> verIntereses(){
         return interesSer.verInteres();
     }
-    
-    @GetMapping("/ver/interes/{id}")
-    @ResponseBody
-    public Interes verInteres(@PathVariable Long id){
-        return interesSer.verInteres(id);
+        
+    @GetMapping("/ver/intereses/persona/{idPersona}")
+    public List<Interes> verInteresesPorPersona(@PathVariable Long idPersona){
+        return interesSer.verInteresesPorPersonaId(idPersona);
     }
     
     @PostMapping("/borrar/interes/{id}")
@@ -40,8 +43,9 @@ public class InteresController {
         interesSer.agregarInteres(interes);
     }
     
-    @PostMapping("/agregar/interes")
-    public void agregarInteres(@RequestBody Interes interes){
+    @PostMapping("/agregar/interes/{personaId}")
+    public void agregarInteres(@RequestBody Interes interes, @PathVariable Long personaId){
+        interes.setPersona(personaSer.verPersona(personaId));
         interesSer.agregarInteres(interes);
-    }    
+    }
 }

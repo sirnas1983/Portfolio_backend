@@ -37,5 +37,10 @@ public class InteresService implements IInteresService{
         interes.setId(id);
         interesRepo.save(interes);
     }
+
+    @Override
+    public List<Interes> verInteresesPorPersonaId(Long idPersona) {
+        return interesRepo.findAllByPersonaId(idPersona);
+    }
     
 }

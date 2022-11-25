@@ -2,7 +2,6 @@ package com.portfolio.backend.service;
 
 
 import com.portfolio.backend.model.Estudio;
-import com.portfolio.backend.model.Persona;
 import java.util.List;
 
 public interface IEstudioService {

@@ -1,6 +1,5 @@
 package com.portfolio.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,7 +20,6 @@ public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String password;
     private String nombre;
     private String ocupacion;
     private String descripcion;
@@ -53,9 +51,8 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Long id, String password, String nombre, String ocupacion, String descripcion, String foto, String banner, String fechaNacimiento, String whatsapp, String email, String repositorio, String acercademi, String facebook, String instagram, String tweeter) {
+    public Persona(Long id, String nombre, String ocupacion, String descripcion, String foto, String banner, String fechaNacimiento, String whatsapp, String email, String repositorio, String acercademi, String facebook, String instagram, String tweeter) {
         this.id = id;
-        this.password = password;
         this.nombre = nombre;
         this.ocupacion = ocupacion;
         this.descripcion = descripcion;
